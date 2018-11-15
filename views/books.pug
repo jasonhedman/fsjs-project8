@@ -1,0 +1,30 @@
+extends layout.pug
+
+block content
+  div.header
+    h1 Books
+    form(method="post", action="/search")
+      label(for='search') Search
+      input#search(name='search', type='text')
+  p
+    a.button(href='/books/new') Create New Book
+
+  table
+    thead
+      tr
+        th Title
+        th Author
+        th Genre
+        th Year
+    tbody
+      each book in books
+        tr
+          td
+            a(href=`/books/${book.id}`)=book.title
+          td=book.author
+          td=book.genre
+          td=book.year
+  div.pagination-container
+    div.pagination
+      while n<pages
+        a.button(href=`/books/page/${n+1}`)= n++ + 1
